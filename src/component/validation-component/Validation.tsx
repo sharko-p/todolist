@@ -1,14 +1,17 @@
 import * as yup from "yup";
 
 const validationSchema = yup.object().shape({
-  userName: yup.string().required(""),
-  email: yup.string().required("").email("forms.validation.email"),
+  userName: yup.string().required("Name field is empty"),
+  email: yup
+    .string()
+    .required("Email field is empty")
+    .email("not correct email"),
   password: yup
     .string()
     .min(5, "Password must be at least 5 characters")
     .required("Password is required"),
 
-  gender: yup.string().oneOf(["male", "female"]).required(),
+  gender: yup.string().oneOf(["male", "female"]).required("Specify gender"),
   age: yup
     .number()
     .min(18, "You must be at least 18 years old")
@@ -17,4 +20,3 @@ const validationSchema = yup.object().shape({
 });
 
 export { validationSchema };
-

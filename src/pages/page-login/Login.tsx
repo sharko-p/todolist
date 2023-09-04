@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent, FormEventHandler, FC } from "react";
+import { useState, FC } from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
@@ -8,10 +8,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { StyledBox, StyledTypography, StyledButton,StyledTypographyForLink } from "./login.style";
+import {
+  StyledBox,
+  StyledTypography,
+  StyledButton,
+  StyledTypographyForLink,
+} from "./login.style";
 import Box from "@mui/material/Box";
 import { Form as FinalForm, Field } from "react-final-form";
-import { useNavigate,Link  } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 interface LoginFormValues {
   login: string;
@@ -31,8 +36,6 @@ const Form: FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (values: LoginFormValues): void => {
-    console.log("Логин:", values.login);
-    console.log("Пароль:", values.password);
     navigate("/home");
   };
 
@@ -77,7 +80,7 @@ const Form: FC = () => {
               {({ input: { value, onChange } }) => (
                 <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-password">
-                  Password
+                    Password
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-password"
@@ -111,7 +114,9 @@ const Form: FC = () => {
                 Sign in
               </StyledButton>
             </Stack>
-            <StyledTypographyForLink >Don't have an Account? <Link to="/registration">Sign Up!</Link></StyledTypographyForLink>
+            <StyledTypographyForLink>
+              Don't have an Account? <Link to="/registration">Sign Up!</Link>
+            </StyledTypographyForLink>
           </Box>
         </StyledBox>
       )}
