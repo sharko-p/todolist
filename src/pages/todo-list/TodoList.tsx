@@ -6,7 +6,7 @@ import { RootState } from "../../redux/store";
 import TaskTodo from "../../component/taskTodo/TaskTodo";
 
 const Todolist = (): JSX.Element => {
-  const tasks = useSelector((state: RootState) => state.counter);
+  const tasks = useSelector((state: RootState) => state.taskMeneger);
   const dispatch = useDispatch();
 
   const handleDelete = (id: string): void => {
@@ -15,7 +15,6 @@ const Todolist = (): JSX.Element => {
 
   return (
     <>
-    
       <h1>Get things done!</h1>
 
       <InputTodo />

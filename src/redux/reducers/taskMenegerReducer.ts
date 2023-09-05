@@ -13,7 +13,7 @@ const initialState: State = {
   tasks: [],
 };
 
-const reducer = (
+const taskMeneger = (
   state: State = initialState,
   action:
     | { type: typeof ADD_TASK; payload: { id: string; title: string }}
@@ -45,4 +45,4 @@ const reducer = (
   }
 };
 
-export default reducer;
+export default taskMeneger;
