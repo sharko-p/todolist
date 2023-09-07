@@ -24,17 +24,10 @@ import FormLabel from "@mui/material/FormLabel";
 import { validationSchema } from "../../component/validation-component/Validation";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
+import { LoginFormValues } from "../../tupes";
 import { FormProps as FinalFormProps } from "react-final-form";
 import { BaseSchema } from "yup";
 import { setIn, ValidationErrors } from "final-form";
-
-interface LoginFormValues {
-  userName: string;
-  password: string;
-  gender: string;
-  age: number;
-}
 
 const Form: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -89,8 +82,6 @@ const Form: FC = () => {
         values,
         invalid,
       }) => {
-
-
         return (
           <StyledBox>
             <Box
@@ -159,9 +150,12 @@ const Form: FC = () => {
                         </InputAdornment>
                       }
                     />
-                    
-                      {touched && error &&<StyledTypographyValidPass><span> {error}</span> </StyledTypographyValidPass>}
-                   
+
+                    {touched && error && (
+                      <StyledTypographyValidPass>
+                        <span> {error}</span>{" "}
+                      </StyledTypographyValidPass>
+                    )}
                   </FormControl>
                 )}
               </Field>
@@ -189,7 +183,6 @@ const Form: FC = () => {
 
               <Field name="age">
                 {({ input, meta: { error, touched } }) => {
-
                   return (
                     <TextField
                       {...input}

@@ -11,14 +11,13 @@ const InputTodo: React.FC = () => {
     setText("");
   };
 
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
   return (
     <>
-      <input
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setText(e.target.value)
-        }
-        value={text}
-      />
+      <input onChange={inputChange} value={text} />
       <button onClick={handleClick}>Add</button>
     </>
   );

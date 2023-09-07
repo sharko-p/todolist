@@ -3,14 +3,10 @@ import { addText } from "../../redux/actions/actionsTodo";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { Task } from "../../tupes";
 
-interface Task {
-  id: string;
-  title: string;
-}
-
-const TaskTodo = ({ task }: { task: Task }): JSX.Element => {
-  const { value } = useSelector((state: RootState) => state.text);
+const TaskTodo: React.FC<{ task: Task }> = ({ task }) => {
+  const { value } = useSelector((state: RootState) => state.taskManager);
 
   const handleEdit = (id: string, title: string): void => {
     dispatch(editTask(id, title));

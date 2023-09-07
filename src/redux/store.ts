@@ -1,9 +1,8 @@
 import logger from "redux-logger";
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
-import taskMenegerReducer from "./reducers/taskMenegerReducer";
-import textReducer from '../redux/reducers/editReducer'
+import taskManagerReducer from "./reducers/taskManagerReducer";
 
-const rootReducer = combineReducers({ taskMeneger: taskMenegerReducer, text: textReducer });
+const rootReducer = combineReducers({ taskManager: taskManagerReducer });
 
 const store: Store = configureStore({
   reducer: rootReducer,

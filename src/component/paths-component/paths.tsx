@@ -1,12 +1,9 @@
 export const pathsPublic = {
   Starting: "/",
   Login: "/account",
+  Registration: "/registration",
 };
 
 export const pathsPrivate = {
   Todo: "/home",
-};
-
-export const pathsRegistration = {
-  Registration: "/registration",
 };
