@@ -24,7 +24,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { validationSchema } from "../../component/validation-component/Validation";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { LoginFormValues } from "../../tupes";
+import { LoginFormValues } from "../../types";
 import { FormProps as FinalFormProps } from "react-final-form";
 import { BaseSchema } from "yup";
 import { setIn, ValidationErrors } from "final-form";

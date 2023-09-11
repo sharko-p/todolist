@@ -1,30 +1,38 @@
 import InputTodo from "../../component/inputTodo/InputTodo";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteTask } from "../../redux/actions/actionsTodo";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import TaskTodo from "../../component/taskTodo/TaskTodo";
+import { StyledBox, StyledTypography } from "./todoList.style";
+import Box from "@mui/material/Box";
 
 const Todolist = (): JSX.Element => {
   const tasks = useSelector((state: RootState) => state.taskManager);
 
-  const dispatch = useDispatch();
-
-  const handleDelete = (id: string): void => {
-    dispatch(deleteTask(id));
-  };
-
-  const buttonOnClick = () => handleDelete("task.id");
   return (
     <>
-      <h1>Get things done!</h1>
+      <StyledBox>
+        <Box
+          sx={{
+            "& > :not(style)": { margin: "20px", width: "max-content" },
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "wrap",
+            backgroundColor: "whitesmoke",
+            height: "fit-content",
+          }}
+        >
+          <div>
+            <StyledTypography variant="h5">Get things done!</StyledTypography>
 
-      <InputTodo />
-      {tasks.tasks.map((task) => (
-        <div key={task.id}>
-          <TaskTodo task={task} />
-          <button onClick={buttonOnClick}>удалить</button>
-        </div>
-      ))}
+            <InputTodo />
+            {tasks.tasks.map((task) => (
+              <div key={task.id}>
+                <TaskTodo task={task} />
+              </div>
+            ))}
+          </div>
+        </Box>
+      </StyledBox>
     </>
   );
 };

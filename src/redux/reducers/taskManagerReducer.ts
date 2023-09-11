@@ -5,7 +5,7 @@ import {
   ADD_TEXT,
 } from "../actions/actionsTypes";
 
-import { Task, State } from "../../tupes";
+import { Task, State } from "../../types";
 
 const initialState: State = {
   tasks: [],
@@ -21,6 +21,7 @@ const taskManager = (
     | { type: typeof DELETE_TASK; payload: string }
     | { type: typeof ADD_TEXT; payload: { text: string } }
 ): State => {
+  console.log(action.payload);
   switch (action.type) {
     case ADD_TASK:
       return {

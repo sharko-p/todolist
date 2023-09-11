@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/actions/actionsTodo";
+import TextField from "@mui/material/TextField";
+import { StyledBox, StyledButton } from "./input.style";
 
 const InputTodo: React.FC = () => {
+
   const [text, setText] = useState<string>("");
+
   const dispatch = useDispatch();
 
   const handleClick = (): void => {
-    dispatch(addTask({ id: text, title: text }));
+    dispatch(addTask({ id: Math.random() * 10000000 + text, title: text }));
     setText("");
   };
 
@@ -17,8 +21,18 @@ const InputTodo: React.FC = () => {
 
   return (
     <>
-      <input onChange={inputChange} value={text} />
-      <button onClick={handleClick}>Add</button>
+      <StyledBox>
+        <TextField
+          id="outlined-basic"
+          label="What is the task today?"
+          variant="outlined"
+          onChange={inputChange}
+          value={text}
+        />
+        <StyledButton variant="contained" type="submit" onClick={handleClick}>
+          Add task
+        </StyledButton>
+      </StyledBox>
     </>
   );
 };
