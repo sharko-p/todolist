@@ -1,23 +1,26 @@
 import { Routes, Route } from "react-router-dom";
-import { publicRoutes, privateRoutes,registrationRoutes } from "../routes-component/Routes";
+import { publicRoutes, privateRoutes } from "../routes-component/Routes";
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   return (
     <>
       <Routes>
         {publicRoutes.map((route) => (
-          <Route path={route.pathsPublic} element={route.element} key={route.pathsPublic} />
+          <Route
+            path={route.pathsPublic}
+            element={route.element}
+            key={route.pathsPublic}
+          />
         ))}
 
         {privateRoutes.map((route) => (
-          <Route path={route.pathsPrivate} element={route.element} key={route.pathsPrivate} />
-        ))}
-        {registrationRoutes.map((route) => (
-          <Route path={route.pathsRegistration} element={route.element} key={route.pathsRegistration} />
+          <Route
+            path={route.pathsPrivate}
+            element={route.element}
+            key={route.pathsPrivate}
+          />
         ))}
       </Routes>
-
-      
     </>
   );
 };

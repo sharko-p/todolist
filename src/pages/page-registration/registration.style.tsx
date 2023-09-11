@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { Typography, styled, RadioGroup,FormLabel,ButtonGroup } from "@mui/material";
+import { Typography, styled, RadioGroup, FormLabel } from "@mui/material";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -16,20 +16,24 @@ const StyledTypography = styled(Typography)({
 });
 const StyledGenderWrapper = styled(RadioGroup)({
   display: "flex",
-  flexDirection: 'row',
-  justifyContent: 'space-between',
+  flexDirection: "row",
+  justifyContent: "space-between",
 });
 
+const StyledGenderFormLabel = styled(FormLabel)({
+  width: "20%",
+  padding: "11px",
+});
 
-const StyledGenderFormLabel= styled(FormLabel)({
-  width:'20%',
-  padding: '11px'
-})
-
-const StyledButtonGroup= styled(ButtonGroup)({
-
-})
-
+const StyledTypographyValidPass = styled(Typography)({
+  textAlign: "start",
+  color: " #d32f2f",
+  fontWeight: "400",
+  fontSize: "0.75rem",
+  lineHeight: "1.66",
+  letterSpacing: " 0.03333em",
+  margin: "2px 14px 0 14px",
+});
 
 const StyledButton = styled(Button)({
   bgColor: "#4CAF50",
@@ -48,11 +52,8 @@ const StyledButton = styled(Button)({
 });
 
 const StyledTypographyForLink = styled(Typography)({
-  textAlign: "center",
+  textAlign: "start",
 });
-
-
-
 
 export {
   StyledBox,
@@ -61,5 +62,5 @@ export {
   StyledGenderWrapper,
   StyledTypographyForLink,
   StyledGenderFormLabel,
-  StyledButtonGroup
+  StyledTypographyValidPass,
 };
