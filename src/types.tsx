@@ -8,10 +8,15 @@ export interface State {
   value: string;
 }
 
-export interface LoginFormValues {
+export interface FormValues {
   userName: string;
   password: string;
   gender: string;
   age: number;
+  email?: string;
 }
 
+export interface LoginFormValues {
+  login: string;
+  password: string;
+}

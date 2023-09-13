@@ -1,16 +1,21 @@
 import * as yup from "yup";
 
+const passwordValidation = yup
+  .string()
+  .min(8, "Password must be at least 8 characters")
+  .matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+    "Password must meet the criteria"
+  )
+  .required("Password is required");
+
 const validationSchema = yup.object().shape({
   userName: yup.string().required("Name field is empty"),
   email: yup
     .string()
     .required("Email field is empty")
-    .email("not correct email"),
-  password: yup
-    .string()
-    .min(5, "Password must be at least 5 characters")
-    .required("Password is required"),
-
+    .email("Not a valid email address"),
+  password: passwordValidation,
   gender: yup.string().oneOf(["male", "female"]).required("Specify gender"),
   age: yup
     .number()

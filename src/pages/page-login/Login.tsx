@@ -17,11 +17,8 @@ import {
 import Box from "@mui/material/Box";
 import { Form as FinalForm, Field } from "react-final-form";
 import { useNavigate, Link } from "react-router-dom";
+import {LoginFormValues} from '../../types'
 
-interface LoginFormValues {
-  login: string;
-  password: string;
-}
 const Form: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 

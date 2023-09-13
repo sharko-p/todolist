@@ -6,8 +6,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   StyledBox,
   StyledTypography,
@@ -24,10 +24,11 @@ import FormLabel from "@mui/material/FormLabel";
 import { validationSchema } from "../../component/validation-component/Validation";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { LoginFormValues } from "../../types";
+import { FormValues } from "../../types";
 import { FormProps as FinalFormProps } from "react-final-form";
 import { BaseSchema } from "yup";
 import { setIn, ValidationErrors } from "final-form";
+import { instance } from "../../axios/axiosCreate";
 
 const Form: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,10 +44,27 @@ const Form: FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (values: LoginFormValues): void => {
-    navigate("/home");
-  };
+/////////////////////////////////////////////////////
 
+  const handleSubmit = async (values: FormValues): Promise<void> => {
+    try {
+      const userData = {
+        id: 1,/////??? насколько я понял в уловиях на серваке целое число, 1 поставил для тестов
+        userName: values.userName,
+        email: values.email,
+        password: values.password,
+        gender: values.gender,
+        age: values.age,
+      };
+       const response = await instance.post("/register", userData);
+       console.log("Успешная регистрация:", response.data);
+       navigate("/home");
+     } catch (error) {
+       console.error("Ошибка при регистрации:", error);
+
+     }
+   };
+//////////////////////////////////
   function validator(
     schema: BaseSchema
   ):
