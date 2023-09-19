@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Task } from "../../types";
-import { editTask, addText, deleteTask } from "../../redux/actions/actionsTodo";
+import { editTask, addText, deleteTask, isCompleted } from "../../redux/actions/actionsTodo"; 
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import IconButton from "@mui/material/IconButton";
@@ -15,18 +15,24 @@ import {
   StyledBoxButton,
   StyledBoxIsEdit,
 } from "./task.style";
+import { instance } from "../../axios/axiosCreate";
 
 const TaskTodo: React.FC<{ task: Task }> = ({ task }) => {
   const { value } = useSelector((state: RootState) => state.taskManager);
   const dispatch = useDispatch();
 
-  const handleEdit = (id: string, title: string): void => {
-    dispatch(editTask(id, title));
+  const handleEdit = async (id: string, title: string): Promise<void> => {
+    try {
+      await instance.patch(`todos/${id}`, { title });
+      dispatch(editTask(id, title));
+    } catch (error) {
+      console.log("Ошибка изменения задачи:", error);
+    }
   };
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [isTaskCompleted, setIsTaskCompleted] = useState<boolean>(false); 
 
   const toggle = (task: Task): void => {
     if (isEdit) {
@@ -37,13 +43,26 @@ const TaskTodo: React.FC<{ task: Task }> = ({ task }) => {
     setIsEdit(!isEdit);
   };
 
-  const handleDelete = (id: string): void => {
-    dispatch(deleteTask(id));
-    console.log("handleDelete", id);
+  const handleDelete = async (id: string): Promise<void> => {
+    try {
+      await instance.delete(`todos/${id}`);
+      dispatch(deleteTask(id));
+    } catch (error) {
+      console.error("Ошибка при удалении задачи:", error);
+    }
   };
+  const handleTextClick = async (): Promise<void> => {
+    try {
+      const updatedTask: { isCompleted: boolean } = { isCompleted: !task.isCompleted };
 
-  const handleTextClick = (): void => {
-    setIsCompleted(!isCompleted);
+      await instance.patch(`todos/${task.id}`, updatedTask);
+
+      dispatch(isCompleted(task.id, task.title)); 
+
+      setIsTaskCompleted(!isTaskCompleted);
+    } catch (error) {
+      console.error("Ошибка при обновлении статуса задачи:", error);
+    }
   };
 
   return (
@@ -74,7 +93,7 @@ const TaskTodo: React.FC<{ task: Task }> = ({ task }) => {
             <StyledTypography
               variant="contained"
               onClick={handleTextClick}
-              style={{ textDecoration: isCompleted ? "line-through" : "none" }}
+              style={{ textDecoration: isTaskCompleted ? "line-through" : "none" }} 
             >
               {task.title}
             </StyledTypography>

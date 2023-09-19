@@ -6,8 +6,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   StyledBox,
   StyledTypography,
@@ -44,27 +44,23 @@ const Form: FC = () => {
 
   const navigate = useNavigate();
 
-/////////////////////////////////////////////////////
-
   const handleSubmit = async (values: FormValues): Promise<void> => {
     try {
       const userData = {
-        id: 1,/////??? насколько я понял в уловиях на серваке целое число, 1 поставил для тестов
-        userName: values.userName,
+        username: values.userName,
         email: values.email,
         password: values.password,
         gender: values.gender,
         age: values.age,
       };
-       const response = await instance.post("/register", userData);
-       console.log("Успешная регистрация:", response.data);
-       navigate("/home");
-     } catch (error) {
-       console.error("Ошибка при регистрации:", error);
+      const response = await instance.post("/users/register", userData);
+      console.log("Успешная регистрация:", response.data);
+      navigate("/home");
+    } catch (error) {
+      console.error("Ошибка при регистрации:", error);
+    }
+  };
 
-     }
-   };
-//////////////////////////////////
   function validator(
     schema: BaseSchema
   ):
