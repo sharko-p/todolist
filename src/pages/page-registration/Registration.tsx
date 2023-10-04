@@ -33,6 +33,8 @@ import { instance } from "../../axios/axiosCreate";
 const Form: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleClickShowPassword = (): void =>
     setShowPassword((preValue) => !preValue);
 
@@ -41,8 +43,6 @@ const Form: FC = () => {
   ): void => {
     event.preventDefault();
   };
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
     try {

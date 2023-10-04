@@ -15,11 +15,10 @@ const InputTodo: React.FC = () => {
     try {
       const taskData: Task = { title: text } as Task;
 
-      
       setText("");
 
       const response = await instance.post("/todos", taskData);
- 
+
       dispatch(addTask(response.data));
     } catch (error) {
       console.error("Ошибка при добавлении таски:", error);
@@ -49,12 +48,3 @@ const InputTodo: React.FC = () => {
 };
 
 export default InputTodo;
-
-
-
-
-
-
-
-
-

@@ -4,7 +4,7 @@ import {
   DELETE_TASK,
   ADD_TEXT,
   ALL_TASKS,
-  IS_COMPLETED
+  IS_COMPLETED,
 } from "./actionsTypes";
 
 type Task = { id: string; title: string };

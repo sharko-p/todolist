@@ -4,7 +4,7 @@ import {
   DELETE_TASK,
   ADD_TEXT,
   ALL_TASKS,
-  IS_COMPLETED
+  IS_COMPLETED,
 } from "../actions/actionsTypes";
 import { payloadValues, PayloadValuesType } from "./actionsPayload";
 
@@ -63,5 +63,3 @@ export const isCompleted = (id: string, title: string): Action => {
     payload: payloadValues[IS_COMPLETED](id, title),
   };
 };
-
-

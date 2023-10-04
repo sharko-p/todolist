@@ -4,7 +4,7 @@ import {
   DELETE_TASK,
   ADD_TEXT,
   ALL_TASKS,
-  IS_COMPLETED
+  IS_COMPLETED,
 } from "../actions/actionsTypes";
 
 import { Task, State } from "../../types";
@@ -23,7 +23,7 @@ const taskManager = (
     | { type: typeof DELETE_TASK; payload: string }
     | { type: typeof ADD_TEXT; payload: { text: string } }
     | { type: typeof ALL_TASKS; payload: Task[] }
-    | { type: typeof IS_COMPLETED; payload: { id: string;} }
+    | { type: typeof IS_COMPLETED; payload: { id: string; title: string } }
 ): State => {
   console.log(action.payload);
   switch (action.type) {
@@ -56,19 +56,24 @@ const taskManager = (
         ...state,
         tasks: action.payload,
       };
-      case IS_COMPLETED:
-        return {
-          ...state,
-          tasks: state.tasks.map((task: Task) =>
-            task.id === action.payload.id
-              ? { ...task, isCompleted: !task.isCompleted, title: action.payload.title }
-              : task
-          ),
-        };
-      default:
-        return state;
+    case IS_COMPLETED:
+      console.log("action.payload.id", action.payload.id);
+      return {
+        ...state,
+
+        tasks: state.tasks.map((task: Task) =>
+          task.id === action.payload.id
+            ? {
+                ...task,
+                isCompleted: !task.isCompleted,
+                title: action.payload.title,
+              }
+            : task
+        ),
+      };
+    default:
+      return state;
   }
 };
 
 export default taskManager;
-
