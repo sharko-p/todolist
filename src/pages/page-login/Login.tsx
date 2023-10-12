@@ -17,13 +17,13 @@ import {
 import Box from "@mui/material/Box";
 import { Form as FinalForm, Field } from "react-final-form";
 import { useNavigate, Link } from "react-router-dom";
+import { instance } from "../../axios/axiosCreate";
+import { LoginFormValues } from "../../types";
 
-interface LoginFormValues {
-  login: string;
-  password: string;
-}
-const Form: FC = () => {
+const Login: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickShowPassword = (): void =>
     setShowPassword((preValue) => !preValue);
@@ -33,10 +33,26 @@ const Form: FC = () => {
   ): void => {
     event.preventDefault();
   };
-  const navigate = useNavigate();
 
-  const handleSubmit = (values: LoginFormValues): void => {
-    navigate("/home");
+  const handleSubmit = async (values: LoginFormValues): Promise<void> => {
+    try {
+      const userData = {
+        email: values.email,
+        password: values.password,
+      };
+      const response = await instance.post("/auth/login", userData);
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+
+        console.log("Успешный вход:", response.data);
+        navigate("/home");
+      } else {
+        console.error("Ответ сервера не содержит токен.");
+      }
+    } catch (error) {
+      console.error("Ошибка при входе:", error);
+    }
   };
 
   return (
@@ -64,7 +80,8 @@ const Form: FC = () => {
             component="form"
           >
             <StyledTypography variant="h6">Login</StyledTypography>
-            <Field name="login">
+
+            <Field name="email">
               {({ input: { value, onChange } }) => (
                 <TextField
                   id="outlined-basic"
@@ -124,4 +141,4 @@ const Form: FC = () => {
   );
 };
 
-export default Form;
+export default Login;

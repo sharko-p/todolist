@@ -1,6 +1,7 @@
 export interface Task {
   id: string;
-  title: string;
+  title: string ;
+  isCompleted?: boolean;
 }
 
 export interface State {
@@ -8,10 +9,26 @@ export interface State {
   value: string;
 }
 
-export interface LoginFormValues {
+export interface FormValues {
   userName: string;
   password: string;
   gender: string;
   age: number;
+  email?: string;
 }
 
+export interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+export interface TaskData {
+  id: number;
+  task: string;
+}
+
+export interface  UpdatedTask {
+  isCompleted: boolean;
+  id: string;
+  title: string;
+} 

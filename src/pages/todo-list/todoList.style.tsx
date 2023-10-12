@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { Typography, styled } from "@mui/material";
+import { Typography, styled, Link } from "@mui/material";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -14,4 +14,8 @@ const StyledTypography = styled(Typography)({
   fontWeight: "bold",
 });
 
-export { StyledBox, StyledTypography };
+const StyledTypographyForLink = styled(Link)({
+  textAlign: "center",
+});
+
+export { StyledBox, StyledTypography, StyledTypographyForLink };

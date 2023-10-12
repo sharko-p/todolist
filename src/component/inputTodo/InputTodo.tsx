@@ -3,16 +3,26 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/actions/actionsTodo";
 import TextField from "@mui/material/TextField";
 import { StyledBox, StyledButton } from "./input.style";
+import { instance } from "../../axios/axiosCreate";
+import { Task } from "../../types";
 
 const InputTodo: React.FC = () => {
-
   const [text, setText] = useState<string>("");
 
   const dispatch = useDispatch();
 
-  const handleClick = (): void => {
-    dispatch(addTask({ id: Math.random() * 10000000 + text, title: text }));
-    setText("");
+  const handleClick = async (): Promise<void> => {
+    try {
+      const taskData: Task = { title: text } as Task;
+
+      setText("");
+
+      const response = await instance.post("/todos", taskData);
+
+      dispatch(addTask(response.data));
+    } catch (error) {
+      console.error("Ошибка при добавлении таски:", error);
+    }
   };
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +39,7 @@ const InputTodo: React.FC = () => {
           onChange={inputChange}
           value={text}
         />
-        <StyledButton variant="contained" type="submit" onClick={handleClick}>
+        <StyledButton variant="contained" type="button" onClick={handleClick}>
           Add task
         </StyledButton>
       </StyledBox>
