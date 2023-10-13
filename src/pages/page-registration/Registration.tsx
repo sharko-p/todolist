@@ -46,14 +46,13 @@ const Form: FC = () => {
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
     try {
-      const userData = {
+      const response = await instance.post("/users/register", {
         username: values.userName,
         email: values.email,
         password: values.password,
         gender: values.gender,
         age: values.age,
-      };
-      const response = await instance.post("/users/register", userData);
+      });
       console.log("Успешная регистрация:", response.data);
       navigate("/home");
     } catch (error) {

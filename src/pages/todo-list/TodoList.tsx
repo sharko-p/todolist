@@ -14,7 +14,7 @@ import { instance } from "../../axios/axiosCreate";
 import { allTasks } from "../../redux/actions/actionsTodo";
 
 const Todolist = (): JSX.Element => {
-  const tasks = useSelector((state: RootState) => state.taskManager);
+  const { tasks } = useSelector((state: RootState) => state.taskManager);
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ const Todolist = (): JSX.Element => {
             <StyledTypography variant="h5">Get things done!</StyledTypography>
 
             <InputTodo />
-            {tasks.tasks.map((task) => (
+            {tasks.map((task) => (
               <div key={task.id}>
                 <TaskTodo task={task} />
               </div>
